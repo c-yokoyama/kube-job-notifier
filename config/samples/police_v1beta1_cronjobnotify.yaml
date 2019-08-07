@@ -1,0 +1,7 @@
+apiVersion: police.cron.manager/v1beta1
+kind: CronJobNotify
+metadata:
+  name: cronjobnotify-sample
+spec:
+  # Add fields here
+  foo: bar
