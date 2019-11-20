@@ -135,12 +135,20 @@ func (s slack) NotifyFailed(messageParam MessageTemplateParam) (err error) {
 func (s slack) notify(attachment slackapi.Attachment) (err error) {
 	api := slackapi.New(s.token)
 
-	channelID, timestamp, err := api.PostMessage(
-		s.channel,
-		slackapi.MsgOptionText("", true),
-		slackapi.MsgOptionAttachments(attachment),
-		slackapi.MsgOptionUsername(s.username),
-	)
+	if s.username != "" {
+		channelID, timestamp, err := api.PostMessage(
+			s.channel,
+			slackapi.MsgOptionText("", true),
+			slackapi.MsgOptionAttachments(attachment),
+			slackapi.MsgOptionUsername(s.username),
+		)
+	} else {
+		channelID, timestamp, err := api.PostMessage(
+			s.channel,
+			slackapi.MsgOptionText("", true),
+			slackapi.MsgOptionAttachments(attachment),
+		)
+	}
 
 	if err != nil {
 		klog.Errorf("Send messageParam failed %s\n", err)
