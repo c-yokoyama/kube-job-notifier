@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"os"
 
-	slackapi "github.com/nlopes/slack"
+	slackapi "github.com/slack-go/slack"
 	"k8s.io/klog"
 )
 
@@ -71,7 +71,6 @@ func (s slack) NotifyStart(messageParam MessageTemplateParam) (err error) {
 		return err
 	}
 	attachment := slackapi.Attachment{
-
 		Color: slackColors["Normal"],
 		Title: "Job Start",
 		Text:  slackMessage,
